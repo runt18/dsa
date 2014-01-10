@@ -3,10 +3,10 @@
 _ = require 'lodash'
 require 'colors'
 
+{floyd_warshall} = require './src/graph/sssp/floyd_warshall'
+
 pretty = (o) ->
     console.log(JSON.stringify(o, null, 2))
-
-{floyd_warshall} = require './floyd_warshall'
 
 adj = [
     [0, 1, Infinity, Infinity]
