@@ -1,5 +1,5 @@
-PriorityQueue = require './priority_queue'
-{relax} = require './graph'
+PriorityQueue = require '../../data/priority_queue'
+{relax} = require '../graph'
 
 # Dijkstra's shortest path algorithm
 # Running time: O(ElogV)     (Binary heap)
@@ -18,3 +18,5 @@ dijkstra = (graph, start) ->
         vertex = queue.extract_min()
         for edge in vertex.neighbours
             relax(vertex, edge)
+
+module.exports = dijkstra

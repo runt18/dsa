@@ -30,11 +30,11 @@ class PriorityQueue
 
         @data[el.i].key = key
 
-        while x.i > 1 and @data[@parent(x.i)].key > @data[x.i].key
-            tmp = @data[x.i]
-            @data[parent(x.i)] = tmp
-            @data[x.i] = @data[parent(x.i)]
-            x.i = parent(x.i)
+        while el.i > 1 and @data[@parent(el.i)].key > @data[el.i].key
+            tmp = @data[el.i]
+            @data[parent(el.i)] = tmp
+            @data[el.i] = @data[parent(el.i)]
+            el.i = parent(el.i)
 
     is_empty: -> @data.length is 0
 
@@ -51,3 +51,5 @@ class PriorityQueue
         el.i = @data.length
         @data.push(el)
         @decrease_key(el, el.key)
+
+module.exports = PriorityQueue

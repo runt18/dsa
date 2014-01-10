@@ -18,4 +18,4 @@ floyd_warshall = (matrix) ->
 
     return curr
 
-module.exports = {floyd_warshall}
+module.exports = floyd_warshall

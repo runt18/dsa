@@ -3,7 +3,10 @@
 _ = require 'lodash'
 require 'colors'
 
-{floyd_warshall} = require './src/graph/sssp/floyd_warshall'
+{Graph, Vertex, relax} = require './src/graph/graph'
+
+floyd_warshall = require './src/graph/sssp/floyd_warshall'
+dijkstra = require './src/graph/shortest_path/dijkstra'
 
 pretty = (o) ->
     console.log(JSON.stringify(o, null, 2))
@@ -33,5 +36,9 @@ expected = [
 ]
 
 new_adj = floyd_warshall(adj)
+
+vertex = new Vertex()
+graph = new Graph([vertex], [])
+dijkstra(graph, vertex)
 
 test(new_adj, expected, 'Floyd-Warshall')
