@@ -9,6 +9,8 @@ floyd_warshall = require './src/graph/sssp/floyd_warshall'
 dijkstra = require './src/graph/shortest_path/dijkstra'
 {Man, Woman, gale_shapley} = require './src/gale_shapley'
 fibonacci = require './src/dynamic/fibonacci'
+edit_distance = require './src/dynamic/edit_distance'
+
 
 pretty = (o) ->
     console.log(JSON.stringify(o, null, 2))
@@ -68,5 +70,6 @@ gale_shapley(men)
 
 # Test fibonacci
 test(fibonacci(7), [1, 1, 2, 3, 5, 8, 13], 'Fibonacci')
+test(edit_distance('bristol', 'hustle'), 5, 'Edit distance')
 
 test(new_adj, expected, 'Floyd-Warshall')
