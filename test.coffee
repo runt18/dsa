@@ -7,6 +7,7 @@ require 'colors'
 
 floyd_warshall = require './src/graph/sssp/floyd_warshall'
 dijkstra = require './src/graph/shortest_path/dijkstra'
+{Man, Woman, gale_shapley} = require './src/gale_shapley'
 
 pretty = (o) ->
     console.log(JSON.stringify(o, null, 2))
@@ -21,6 +22,7 @@ test = (actual, expected, message) ->
         console.log('to be')
         console.log(expected)
 
+# Test Floyd-Warshall
 adj = [
     [0, 1, Infinity, Infinity]
     [Infinity, 0, 1, Infinity]
@@ -37,8 +39,30 @@ expected = [
 
 new_adj = floyd_warshall(adj)
 
+# Test Dijkstra
 vertex = new Vertex()
 graph = new Graph([vertex], [])
 dijkstra(graph, vertex)
+
+# Test Gale-shapley
+alan = new Man('Alan')
+bill = new Man('Bill')
+carl = new Man('Carl')
+
+debbie = new Woman('Debbie')
+elena = new Woman('Elena')
+freida = new Woman('Freida')
+
+alan.preferences = [debbie, elena, freida]
+bill.preferences = [elena, debbie, freida]
+carl.preferences = [debbie, freida, elena]
+
+debbie.preferences = [carl, alan, bill]
+elena.preferences = [alan, bill, carl]
+freida.preferences = [alan, carl, bill]
+
+men = [alan, bill, carl]
+
+gale_shapley(men)
 
 test(new_adj, expected, 'Floyd-Warshall')
