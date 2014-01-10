@@ -8,6 +8,16 @@ require 'colors'
 pretty = (o) ->
     console.log(JSON.stringify(o, null, 2))
 
+test = (actual, expected, message) ->
+    if _.isEqual(actual, expected)
+        console.log("#{message} passed".green)
+    else
+        console.log("#{message} failed".red)
+        console.log('Expected')
+        console.log(actual)
+        console.log('to be')
+        console.log(expected)
+
 adj = [
     [0, 1, Infinity, Infinity]
     [Infinity, 0, 1, Infinity]
@@ -24,7 +34,4 @@ expected = [
 
 new_adj = floyd_warshall(adj)
 
-if _.isEqual(new_adj, expected)
-    console.log('Floyd-Warshall works'.green)
-else
-    console.log('Floyd-Warshall fails'.red)
+test(new_adj, expected, 'Floyd-Warshall')
