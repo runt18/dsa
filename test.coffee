@@ -68,6 +68,8 @@ men = [alan, bill, carl]
 
 gale_shapley(men)
 
+test(carl.match, debbie, 'Gale-Shapley')
+
 # Test fibonacci
 test(fibonacci(7), [1, 1, 2, 3, 5, 8, 13], 'Fibonacci')
 test(edit_distance('bristol', 'hustle'), 5, 'Edit distance')
