@@ -1,14 +1,14 @@
 _ = require 'lodash'
 
 counting_sort = (arr) ->
-    range = _.max(arr)
-    temp = (0 for x in [0..range])
+    range = [0.._.max(arr)]
+    temp = (0 for x in range)
     out = (0 for x in arr)
 
     for x in arr
         temp[x]++
 
-    for i in [2..range]
+    for i in range[2..]
         temp[i] += temp[i - 1]
 
     for x in arr by -1
