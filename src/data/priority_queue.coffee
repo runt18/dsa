@@ -38,11 +38,13 @@ class PriorityQueue
             @data[el.i] = @data[@parent(el.i)]
             el.i = @parent(el.i)
 
+        return this
+
     is_empty: -> @data.length is 0
 
     extract_min: ->
         if @data.length < 1
-            fatal('Heap underflow')
+            throw new Error('Heap underflow')
 
         min = @data[0]
         @data[0] = _.last(@data)
@@ -51,8 +53,9 @@ class PriorityQueue
         return min
 
     insert: (el) ->
-        el.i = @data.length - 1
-        @data[el.i] = el
+        el.i = @data.length
+        @data.push(el)
         @decrease_key(el, el.distance)
+        return this
 
 module.exports = PriorityQueue

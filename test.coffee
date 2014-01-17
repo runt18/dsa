@@ -29,8 +29,7 @@ bmh = require './src/string/bmh'
 bfs = require './src/graph/traversal/bfs'
 dfs = require './src/graph/traversal/dfs'
 
-SkipList = require './src/data/skip_list'
-BloomFilter = require './src/data/bloom_filter'
+
 
 pretty = (o) ->
     console.log(JSON.stringify(o, null, 2))
@@ -134,14 +133,6 @@ test(kmp('ababaabbababb', 'ababb'), [9], 'Knuth-Morris-Pratt string matcher')
 test(bmh('ababaabbababb', 'ababb'), [9], 'Boyer-Moore-Horspool string matcher')
 
 test(new_adj, expected, 'Floyd-Warshall')
-
-# sl = new SkipList()
-# sl.insert(2, 'foo').insert(5, 'bar').insert(8, 'baz')
-# test(sl.find(2), 'foo', "Skip list data store")
-
-bf = new BloomFilter(10, 5)
-bf.insert(8)
-test(bf.member(8), true, "Bloom filter data store")
 
 msg = "#{passed} / #{total} tests passed (#{(passed / total * 100).toFixed(2)}%)"
 msg = if passed is total then msg.green else msg.red
