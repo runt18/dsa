@@ -1,4 +1,4 @@
-{relax} = require './graph'
+{relax} = require '../../graph'
 
 # Bellman-Ford shortest path algorithm
 # Running time: O(VE)
@@ -17,4 +17,6 @@ bellman_ford = (graph, start) ->
     for vertex in graph.vertices
         for edge in vertex.neighbours
             if edge.target.distance > vertex.distance + edge.cost
-                fatal('Negative weight cycle detected')
+                throw new Error('Negative weight cycle detected')
+
+module.exports = bellman_ford
