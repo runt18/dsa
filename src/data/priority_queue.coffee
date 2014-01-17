@@ -1,40 +1,42 @@
+_ = require 'lodash'
+
 class PriorityQueue
     constructor: ->
         @data = []
 
-    parent: (n) -> Math.floor(n / 2)
+    parent: (n) -> Math.floor((n - 1) / 2)
 
-    left: (n) -> 2 * n  + 1
+    left: (n) -> (2 * n) + 1
 
-    right: (n) -> 2 * n + 2
+    right: (n) -> (2 * n) + 2
 
     heapify: (i) ->
         left = @left(i)
         right = @right(i)
-        if left <= @data.length and @data[left] < @data[i]
+        if left < @data.length and @data[left].distance < @data[i].distance
             smallest = left
         else
             smallest = i
-        if right <= @data.length and @data[right] < @data[smallest]
+        if right < @data.length and @data[right].distance < @data[smallest].distance
             smallest = right
 
         unless smallest is i
             tmp = @data[smallest]
             @data[smallest] = @data[i]
             @data[i] = tmp
-            heapify(smallest)
+            @heapify(smallest)
 
     decrease_key: (el, key) ->
-        if key > @data[el.i].key
+        if key > @data[el.i].distance
             fatal('New key is greater than existing key')
 
-        @data[el.i].key = key
+        @data[el.i].distance = key
 
-        while el.i > 1 and @data[@parent(el.i)].key > @data[el.i].key
+        while el.i > 0 and @data[@parent(el.i)].distance > @data[el.i].distance
             tmp = @data[el.i]
-            @data[parent(el.i)] = tmp
-            @data[el.i] = @data[parent(el.i)]
-            el.i = parent(el.i)
+            @data[@parent(el.i)] = tmp
+            @data[el.i] = @data[@parent(el.i)]
+            el.i = @parent(el.i)
 
     is_empty: -> @data.length is 0
 
@@ -43,13 +45,14 @@ class PriorityQueue
             fatal('Heap underflow')
 
         min = @data[0]
-        @data[0] = @data[@data.length - 1]
+        @data[0] = _.last(@data)
+        @data = @data[..-1]
         @heapify(0)
-        return @data.pop()
+        return min
 
     insert: (el) ->
-        el.i = @data.length
-        @data.push(el)
-        @decrease_key(el, el.key)
+        el.i = @data.length - 1
+        @data[el.i] = el
+        @decrease_key(el, el.distance)
 
 module.exports = PriorityQueue

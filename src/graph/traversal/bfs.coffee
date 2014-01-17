@@ -11,15 +11,18 @@ bfs = (graph, start) ->
     start.distance = 0
     start.previous = null
 
-    queue = new Queue()
+    queue = []
+    queue.push(start)
 
-    queue.enqueue(start)
-
-    until queue.is_empty()
-        u = queue.dequeue()
-        for vertex in u.neighbours
+    until queue.length is 0
+        u = queue.splice(0, 1)[0]
+        for edge in u.neighbours
+            vertex = edge.target
             unless vertex.discovered
                 vertex.discovered = true
-                vertex.distance = u.distance + 1
-                queue.enqueue(vertex)
+                vertex.distance = u.distance + edge.cost
+                vertex.previous = u
+                queue.push(vertex)
         u.explored = true
+
+module.exports = bfs

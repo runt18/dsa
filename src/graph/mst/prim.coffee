@@ -1,4 +1,4 @@
-PriorityQueue = require './priority_queue'
+PriorityQueue = require '../../data/priority_queue'
 
 # Prim's algorithm for minimium spanning trees
 prim = (graph) ->
@@ -14,10 +14,12 @@ prim = (graph) ->
 
     until queue.is_empty()
         u = queue.extract_min()
-        for edge in graph.edges when edge.v1 is u or edge.v2 is u
-            v = u is edge.v1 then edge.v2 else edge.v1
+        for edge in graph.edges when edge.source is u or edge.target is u
+            v = if u is edge.source then edge.target else edge.source
             if v in queue.data and edge.cost < v.key
                 v.previous = u
                 queue.decrease_key(v, edge.cost)
+
+    return
 
 module.exports = prim

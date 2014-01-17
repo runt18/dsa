@@ -4,6 +4,9 @@ class Graph
 class Vertex
     constructor: (@neighbours=[]) ->
 
+class Edge
+    constructor: (@source, @target, @cost=0) ->
+
 relax = (u, e) ->
     v = e.target
     new_dist = u.distance + e.cost
@@ -11,4 +14,6 @@ relax = (u, e) ->
         v.distance = new_dist
         v.previous = u
 
-module.exports = {Graph, Vertex, relax}
+    return v
+
+module.exports = {Graph, Vertex, Edge, relax}

@@ -1,6 +1,7 @@
+_ = require 'lodash'
 
 class Node
-    constructor: (@data=0, @next=null) ->
+    constructor: (@data=null, @next=null) ->
 
 class List
     constructor: (@head=null, @tail=null) ->
@@ -9,13 +10,15 @@ class DisjointSet
     constructor: (@size) ->
         @universe = (null for x in [1..@size])
 
-    make_set: (x) ->
-        node = new Node(x)
+    make_set: (x, data) ->
+        node = new Node(data)
         list = new List(node, node)
 
         @universe[x] = list
 
-    find_set: (x) -> @universe.head.data
+    find_set: (x) ->
+        console.log x
+        @universe[x].head.data
 
     union: (x, y) ->
         @universe[x].tail.next = @universe[y].head
@@ -25,17 +28,21 @@ class DisjointSet
             @universe[node.data] = @universe[x]
             node = node.next
 
-forest = []
-
 # Kruskal's algorithm for minimium spanning trees
 kruskal = (graph) ->
-    set = new DisjointSet()
+    forest = []
+    set = new DisjointSet(graph.vertices.length)
 
-    for vertex in graph.vertices
-        set.make_set(vertex)
+    for vertex, i in graph.vertices
+        set.make_set(i, vertex)
+        vertex.i = i
 
-    edges = _.sort(graph.edges, (e1, e2) -> e1.cost < e2.cost)
+    edges = _.sortBy(graph.edges, (e) -> e.cost)
     for edge in edges
-        if set.find_set(edge.v1) isnt set.find_set(edge.v2)
+        if set.find_set(edge.source.i) isnt set.find_set(edge.target.i)
             forest.push(edge)
-            set.union(edge.v1, edge.v2)
+            set.union(edge.source.i, edge.target.i)
+
+    return forest
+
+module.exports = kruskal
