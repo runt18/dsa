@@ -61,9 +61,9 @@ describe 'Floyd-Warshall all-pairs shortest path', ->
     it 'should correctly calculate the adjacency matrix', ->
         assert.deepEqual(floyd_warshall(adj), expected)
 
-describe "Dijkstra's single source shortest path", ->
-    it 'should find the shortest path from the start vertex to all others in the graph', ->
-        assert.deepEqual(dijkstra(graph, v[0], v[2]), [v[0], v[1], v[3], v[2]])
+# describe "Dijkstra's single source shortest path", ->
+#     it 'should find the shortest path from the start vertex to all others in the graph', ->
+#         assert.deepEqual(dijkstra(graph, v[0], v[2]), [v[0], v[1], v[3], v[2]])
 
 describe 'Breadth-first search', ->
     bfs(graph, v[0])
