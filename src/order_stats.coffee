@@ -28,11 +28,12 @@ rand_select = (a, i, start=0, end=a.length-1) ->
     pivot = a[end]
     # Partition by that value and get its index
     pivot_idx = partition(a, start, end, pivot)
-    k = pivot_idx - start + 1
+    # Offset the pivot index to be in the range a[start..end]
+    offset_idx = pivot_idx - start + 1
 
-    return if i is k then a[pivot_idx]
-    else if i < k then rand_select(a, start, pivot_idx - 1, i)
-    else rand_select(a, pivot_idx + 1, end, i - k)
+    return if i is offset_idx then a[pivot_idx]
+    else if i < offset_idx then rand_select(a, start, pivot_idx - 1, i)
+    else rand_select(a, pivot_idx + 1, end, i - offset_idx)
 
 # Selects the ith smallest element of array a using BFPRT's method to choose a
 # pivot, giving O(n) worst-case performance
@@ -45,9 +46,8 @@ select = (a, i, start=0, end=a.length-1) ->
 
     # If the index of the pivot is the index being searched for, return the
     # value of the pivot
-    # Otherwise return the result of recursively evaluating the subsections
-    # to the left and right of the pivot depending on whether the index
-    # being searched for is less or greater, respectively.
+    # Otherwise return the result of recursively evaluating the subsection
+    # to the left or the right of the pivot based on the search index
     return if i is pivot_idx then pivot
     else if i < pivot_idx then select(a[..pivot_idx], i)
     else select(a[pivot_idx+1..], i - pivot_idx)

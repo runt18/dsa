@@ -17,12 +17,15 @@ describe 'String edit distance calculator', ->
 describe 'Palindromes', ->
     it 'should determine whether a string is palindromic', ->
         assert.equal(is_palindrome('madamimadam'), true)
+        assert.equal(is_palindrome('a'), true)
+        assert.equal(is_palindrome('ab'), false)
+        assert.equal(is_palindrome('aba'), true)
         assert.equal(is_palindrome('hello world'), false)
 
     it 'should find the minimum number of palindromes the given string can be constructed from', ->
         assert.equal(min_palindrome('a'), 1)
         assert.equal(min_palindrome('ab'), 2)
         assert.equal(min_palindrome('aba'), 1)
-        # assert.equal(min_palindrome('baobab'), 4)
-        # assert.equal(is_palindrome('amanaplanacanalpanama'), 1)
-        # assert.equal(is_palindrome('abcdef'), 6)
+        assert.equal(min_palindrome('baobab'), 4)
+        assert.equal(min_palindrome('amanaplanacanalpanama'), 1)
+        assert.equal(min_palindrome('abcdef'), 6)

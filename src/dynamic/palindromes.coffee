@@ -8,10 +8,24 @@ is_palindrome = (s) ->
             return false
     return true
 
-min_palindrome = (s, i=0, j=s.length-1) ->
-    return switch i
-        when j then 1
-        when j - 1 then 2
-        else _.min((min_palindrome(s, i, k) for k in [i..j]))
+min_palindrome = (s) ->
+    m = ((if i is j then 1 else null for c1, j in s) for c2, i in s)
+    return min_pal_r(s, m, 0, s.length - 1)
+
+min_pal_r = (s, m, i, j) ->
+    if m[i][j] isnt null
+        return m[i][j]
+
+    if is_palindrome(s[i..j])
+        m[i][j] = 1
+        return 1
+
+    min = j - i + 1
+    for k in [i...j]
+        temp = min_pal_r(s, m, i, k) + min_pal_r(s, m, k + 1, j)
+        if min > temp
+            min = temp
+    m[i][j] = min
+    return min
 
 module.exports = {is_palindrome, min_palindrome}
