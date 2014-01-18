@@ -11,7 +11,7 @@ counting_sort = (arr) ->
     for i in range[2..]
         temp[i] += temp[i - 1]
 
-    for x in arr by -1
+    for x in arr
         out[temp[x] - 1] = x
         temp[x]--
 
