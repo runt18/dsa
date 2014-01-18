@@ -4,7 +4,7 @@ This repository contains CoffeeScript implementations of a variety of data struc
 
 # Testing
 
-To test their behaviour install Mocha globally with `npm install -g mocha` and then run `make` from the project root.
+To test their behaviour install Grunt globally with `npm install -g grunt-cli` and then run `grunt` from the project root.
 
 # Contributing
 

@@ -5,7 +5,10 @@
   "main": "index.js",
   "dependencies": {
     "lodash": "~2.4.1",
-    "mathjs": "~0.18.0"
+    "mathjs": "~0.18.0",
+    "grunt-mocha-test": "~0.8.2",
+    "grunt": "~0.4.2",
+    "coffee-script": "~1.6.3"
   },
   "devDependencies": {},
   "scripts": {
