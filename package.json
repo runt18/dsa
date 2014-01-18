@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "mathjs": "~0.18.0"
   },
   "devDependencies": {},
   "scripts": {
