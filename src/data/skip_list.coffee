@@ -1,4 +1,4 @@
-coin = -> Math.random() > 0.5
+_ = require '../util'
 
 class Node
     constructor: (@data=null, @key=0, @next=null) ->
@@ -22,7 +22,7 @@ class SkipList
 
         level = 1
 
-        while coin()
+        while _.coin()
             n = new Node(data, key)
             n.below = lower
             lower = n

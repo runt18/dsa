@@ -1,8 +1,4 @@
-# Splits array a into chunks of size n
-chunks = (a, n) -> (a[i...i+n] for x, i in a by n)
-
-# Returns the median value of the array of numbers
-median = (a) -> a.sort()[Math.floor(a.length / 2)]
+_ = require './util'
 
 # Rearrange the elements of a[start..end] so that elements less than pivot are
 # at the start, and elements greater than it are at the end
@@ -39,7 +35,7 @@ rand_select = (a, i, start=0, end=a.length-1) ->
 # pivot, giving O(n) worst-case performance
 select = (a, i, start=0, end=a.length-1) ->
     # Find the median of the medians of the 5-element subsections of a
-    pivot = median((median(chunk) for chunk in chunks(a, 5)))
+    pivot = _.median((_.median(chunk) for chunk in _.chunks(a, 5)))
     # x = select(medians, Math.floor(medians.length / 2))
     # Partition the array by the pivot and get the pivots index
     pivot_idx = partition(a, start, end, pivot)
