@@ -1,0 +1,3 @@
+simplex = () ->
+
+module.exports = simplex
