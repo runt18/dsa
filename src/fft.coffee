@@ -16,7 +16,7 @@ fft_r = (a) ->
     return a if n is 1
 
     # Compute the nth root of unity of the polynomial
-    wn = root_of_unity(n)
+    rou = root_of_unity(n)
     w = select(1)
     # Split the polynomial into two sets, the even-indexed components and the
     # odd-indexed ones, and recursively evaluate each
@@ -27,9 +27,9 @@ fft_r = (a) ->
     # Multiply the two components into one array
     for x, k in y0
         b = w.multiply(y1[k].done()).done()
-        y[k] = y0[k].add(b)
-        y[k + y0.length] = y0[k].subtract(b)
-        w = w.multiply(wn)
+        y[k] = x.add(b)
+        y[y0.length + k] = x.subtract(b)
+        w = w.multiply(rou)
 
     # Return it
     return y

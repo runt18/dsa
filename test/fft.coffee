@@ -36,3 +36,12 @@ describe 'Fast Fourier Transform', ->
         expected = [0, -8, 22, 34, 24]
 
         assert.deepEqual(fixed, expected)
+
+        a = [3, 0, 1]
+        b = [-2, 8, 5]
+
+        raw = polynomial_multiply(a, b)
+        fixed = complex_fix(raw)
+        expected = [-6, 24, 13, 8, 5]
+
+        assert.deepEqual(fixed, expected)

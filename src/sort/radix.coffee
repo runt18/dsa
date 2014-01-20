@@ -10,6 +10,8 @@ split = (arr, base, digit) ->
         buckets[get_digit(x, base, digit)].push(x)
     return buckets
 
+# Sort an array of integers in O(n) time by sorting by digit, from least to
+# most significant
 radix_sort = (arr, base) ->
     passes = round(log(_.max((abs(x) for x in arr))) / log(base)) + 1
     out = arr[..]
