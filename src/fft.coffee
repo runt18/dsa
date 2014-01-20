@@ -3,6 +3,7 @@ _ = require './util'
 math = require('mathjs')()
 {pow, multiply, divide, add, subtract, pi, e, select, format} = math
 
+# Calculates (e ^ ((2*pi*i) / n))
 root_of_unity = (n) ->
     pow(e, select(2).multiply(pi).multiply(math.i).divide(n).done())
 
@@ -14,7 +15,7 @@ fft_r = (a) ->
     # Recursion base case: a polynomial with one term is already solved
     return a if n is 1
 
-    # Compute the nth root of unity of the polynomial (e ^ ((2*pi*i) / n))
+    # Compute the nth root of unity of the polynomial
     wn = root_of_unity(n)
     w = select(1)
     # Split the polynomial into two sets, the even-indexed components and the
@@ -33,6 +34,8 @@ fft_r = (a) ->
     # Return it
     return y
 
+# Wrapper function to preprocess the input array before handing it off to the
+# main function
 fft = (a) ->
     # Find the next power of two greater than the order of the polynomial
     len = _.next_power(a.length, 2)
