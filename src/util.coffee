@@ -18,6 +18,8 @@ coin = -> random() > 0.5
 
 # Returns true if n is prime
 is_prime = (n) ->
+    return false if n < 2
+    return true if n is 2
     for x in [2..ceil(sqrt(n))]
         if n % x is 0
             return false
