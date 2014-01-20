@@ -34,7 +34,11 @@ next_power = (n, power) ->
     x *= power while x < n
     return x
 
+# Adds zeros to the end of the array until its length passes the test
+zero_pad = (a, fn) ->
+    a.push(0) until fn(a.length)
+
 _.mixin({nths, evens, odds, chunks, median, coin, is_prime, next_prime,
-    next_power})
+    next_power, zero_pad})
 
 module.exports = _

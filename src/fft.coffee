@@ -3,9 +3,6 @@ _ = require './util'
 math = require('mathjs')()
 {pow, multiply, divide, add, subtract, pi, e, select, format} = math
 
-zero_pad = (a) ->
-    a.push(select(0)) until a.length % 2 is 0
-
 root_of_unity = (n) ->
     pow(e, select(2).multiply(pi).multiply(math.i).divide(n).done())
 
@@ -13,11 +10,9 @@ root_of_unity = (n) ->
 # representation to point value representation. Input a is an array whose ith
 # element is the coefficient of x^i in the polynomial
 fft_r = (a) ->
-    # Recursion base case: a polynomial with one term is already solved
-    return a if a.length is 1
-
-    # zero_pad(a)
     n = a.length
+    # Recursion base case: a polynomial with one term is already solved
+    return a if n is 1
 
     # Compute the nth root of unity of the polynomial (e ^ ((2*pi*i) / n))
     wn = root_of_unity(n)
@@ -25,11 +20,6 @@ fft_r = (a) ->
     # Split the polynomial into two sets, the even-indexed components and the
     # odd-indexed ones, and recursively evaluate each
     [y0, y1] = [fft_r(_.evens(a)), fft_r(_.odds(a))]
-
-    if y0.length < y1.length
-        y0.push(select(0)) until y0.length is y1.length
-    if y1.length < y0.length
-        y1.push(select(0)) until y0.length is y1.length
 
     y = []
 
@@ -43,7 +33,15 @@ fft_r = (a) ->
     # Return it
     return y
 
-fft = (a) -> fft_r((select(x) for x in a))
+fft = (a) ->
+    # Find the next power of two greater than the order of the polynomial
+    len = _.next_power(a.length, 2)
+    # Add zero coefficients to the polynomial until it's that length
+    _.zero_pad(a, (l) -> l is len)
+    # Convert to Math.js representation
+    a = (select(x) for x in a)
+    # Run the FFT on it
+    return fft_r(a)
 
 # Converts a polynomial in point-value representation into a coefficient
 # representation
@@ -51,13 +49,11 @@ inverse_fft = (a) ->
     out = []
     n = a.length
     rou = root_of_unity(n)
-    w = select(1)
 
     for x, i in a
         sum = select(0)
         for y, j in a
-            sum = sum.add(y.multiply(pow(w.done(), -j * i)).done())
-        w = w.multiply(rou)
+            sum = sum.add(y.multiply(pow(rou, -j * i)).done())
         out[i] = sum.divide(n)
 
     return out
