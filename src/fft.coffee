@@ -77,7 +77,4 @@ polynomial_multiply = (a, b) ->
 # long multiplication
 polynomial_multiply_slow = (a, b) ->
 
-complex_format = (a) -> (format(x.done(), 2) for x in a)
-
-module.exports = {complex_format, fft, inverse_fft,
-    polynomial_multiply, polynomial_multiply_slow}
+module.exports = {fft, inverse_fft, polynomial_multiply, polynomial_multiply_slow}
