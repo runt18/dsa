@@ -51,11 +51,13 @@ inverse_fft = (a) ->
     out = []
     n = a.length
     rou = root_of_unity(n)
+    w = select(1)
 
     for x, i in a
         sum = select(0)
         for y, j in a
-            sum = sum.add(y.multiply(pow(rou, -j * i)).done())
+            sum = sum.add(y.multiply(pow(w.done(), -j * i)).done())
+        w = w.multiply(rou)
         out[i] = sum.divide(n)
 
     return out
@@ -81,4 +83,5 @@ polynomial_multiply_slow = (a, b) ->
 
 complex_format = (a) -> (format(x.done(), 2) for x in a)
 
-module.exports = {complex_format, fft, polynomial_multiply, polynomial_multiply_slow}
+module.exports = {complex_format, fft, inverse_fft,
+    polynomial_multiply, polynomial_multiply_slow}
