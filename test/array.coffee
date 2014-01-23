@@ -17,13 +17,14 @@ describe 'Array functions', ->
             assert.equal(all_unique('hello'), false)
             assert.equal(all_unique('abcd'), true)
 
-# console.log all_unique('hello')
-# console.log all_unique('abcd')
+    describe 'Reverse', ->
+        it 'should reverse the array', ->
+            assert.deepEqual(reverse('hello\0'), 'olleh\0')
 
-# console.log reverse('hello')
-
-# console.log is_anagram('stop', 'spot')
-# console.log is_anagram('fork', 'cord')
+    describe 'Anagram', ->
+        it 'should correctly identify anagrams', ->
+            assert.equal(is_anagram('stop', 'spot'), true)
+            assert.equal(is_anagram('fork', 'cord'), false)
 
 # console.log escape_spaces('hi there john')
 

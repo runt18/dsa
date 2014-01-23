@@ -1,4 +1,4 @@
-_ = require 'lodash'
+_ = require './util'
 
 all_unique = (s) ->
     seen = ''
@@ -34,8 +34,9 @@ max = (array) ->
 
 is_anagram = (s1, s2) ->
     return false if s1.length isnt s2.length
-
-    return quicksort(s1).join('') is quicksort(s2).join('')
+    s1 = _.toArray(s1)
+    s2 = _.toArray(s2)
+    return _.isEqual(s1.sort(), s2.sort())
 
 escape_spaces = (s) ->
     ((if c is ' ' then '%20' else c) for c in s).join('')
@@ -58,7 +59,7 @@ is_rotation = (s1, s2) ->
     return false if s1.length isnt s2.length
     return (s1 + s1).indexOf(s2) isnt -1
 
-module.exports = {
+module.exports = module.exports = {
     all_unique
     reverse
     max

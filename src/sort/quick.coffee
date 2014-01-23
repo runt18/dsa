@@ -1,6 +1,7 @@
+_ = require '../util'
+
 quicksort = (array) ->
-    if typeof array is 'string'
-        array = array.split('')
+    array = _.toArray(array)
 
     # An array of zero or one elements is already sorted
     return array if array.length < 2
