@@ -26,13 +26,28 @@ describe 'Array functions', ->
             assert.equal(is_anagram('stop', 'spot'), true)
             assert.equal(is_anagram('fork', 'cord'), false)
 
-# console.log escape_spaces('hi there john')
+    describe 'Escape', ->
+        it 'should escape spaces', ->
+            assert.deepEqual(escape_spaces('hello world'), 'hello%20world')
 
-# console.log(zero_cross([
-#     [1, 2, 3, 4],
-#     [0, 8, 1, 9],
-#     [4, 1, 4, 2],
-#     [9, 3, 0, 6]
-# ]))
+    describe 'Zero cross', ->
+        input = [
+            [1, 2, 3, 4]
+            [0, 8, 1, 9]
+            [4, 1, 4, 2]
+            [9, 3, 0, 6]
+        ]
 
-# console.log(max([3,5,7,1,9,2]))
+        expected = [
+            [0, 2, 0, 4]
+            [0, 0, 0, 0]
+            [0, 1, 0, 2]
+            [0, 0, 0, 0]
+        ]
+
+        it 'should set every row and column with a zero in to all zeroes', ->
+            assert.deepEqual(zero_cross(input), expected)
+
+    describe 'Max', ->
+        it 'should find the maximum element', ->
+            assert.equal(max([3,5,7,1,9,2]), 9)
