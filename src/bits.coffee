@@ -14,8 +14,6 @@ set_bits = (n, m, start, end) ->
         else
             n &= ~(1 << (i + start))
 
-        console.log bits_to_str n
-
     return n
 
 module.exports = {bits_to_str, str_to_bits, set_bits}
