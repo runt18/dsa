@@ -5,7 +5,7 @@ assert = require 'assert'
 describe 'Bit manipulation', ->
     describe 'set_bits', ->
         it 'should set the correct bits', ->
-            assert.equal(set_bits(512, 21, 2, 6), 564)
+            assert.equal(set_bits(1024, 21, 2, 6), 1108)
 
     describe 'bits_to_str', ->
         it 'should convert the number to a bitstring', ->

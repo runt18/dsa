@@ -10,9 +10,11 @@ set_bits = (n, m, start, end) ->
     for i in [0..diff]
         bit = m & (1 << i)
         if bit
-            n |= 1 << (i + start - 1)
+            n |= 1 << (i + start)
         else
-            n &= ~(1 << (i + start - 1))
+            n &= ~(1 << (i + start))
+
+        console.log bits_to_str n
 
     return n
 
