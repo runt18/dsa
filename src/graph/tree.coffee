@@ -1,3 +1,6 @@
+class Node
+    constructor: (@left=null, @right=null, @value=null) ->
+
 height = (tree) ->
     h = 1
     lh = if tree.left then height(tree.left) else 0
@@ -7,4 +10,19 @@ height = (tree) ->
 
 is_balanced = (tree) -> Math.abs(height(tree.left) - height(tree.right)) <= 1
 
-module.exports = {height, is_balanced}
+make_tree = (array) ->
+    l = array.length
+
+    if l is 0
+        return null
+
+    tree = new Node()
+    divider = Math.floor(l / 2)
+
+    tree.value =  array[divider]
+    tree.left = make_tree(array[...divider])
+    tree.right = make_tree(array[divider+1..])
+
+    return tree
+
+module.exports = {Node, height, is_balanced, make_tree}
