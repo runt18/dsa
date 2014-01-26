@@ -1,4 +1,4 @@
-{relax} = require '../../graph'
+{relax} = require '../../../data/graph'
 
 # Bellman-Ford shortest path algorithm
 # Running time: O(VE)

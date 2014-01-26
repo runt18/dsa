@@ -1,6 +1,6 @@
 assert = require 'assert'
 
-Tree = require '../src/graph/tree'
+Tree = require '../src/data/tree'
 List = require '../src/data/linked_list'
 
 describe 'Tree', ->

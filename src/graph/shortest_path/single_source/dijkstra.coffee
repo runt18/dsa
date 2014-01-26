@@ -1,5 +1,5 @@
 PriorityQueue = require '../../../data/priority_queue'
-{relax} = require '../../graph'
+{relax} = require '../../../data/graph'
 _ = require 'lodash'
 
 # Dijkstra's shortest path algorithm

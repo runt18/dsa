@@ -1,7 +1,7 @@
 root = '../src/graph/'
 
 assert = require 'assert'
-{Graph, Vertex, Edge, relax} = require "#{root}/graph"
+{Graph, Vertex, Edge, relax} = require "../src/data/graph"
 
 floyd_warshall = require "#{root}shortest_path/all_pairs/floyd_warshall"
 johnson = require "#{root}shortest_path/all_pairs/johnson"
