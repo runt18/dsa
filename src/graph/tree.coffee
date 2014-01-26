@@ -43,21 +43,22 @@ class Tree
 
         return tree
 
-common_ancestor = (tree, n1, n2) ->
+    find_sum: (search, node=this, sum=0, seq=[], seqs=[]) ->
+        if sum is search
+            seqs.push(seq)
+        for sub in [node.left, node.right] when sub
+            node.find_sum(search, sub, sum + node.value, seq.concat([node.value]), seqs)
+        return seqs
 
-# Checks if n2 is a subtree of n1
-is_subtree = (n1, n2) ->
-    return true if n2 is null
+    common_ancestor: (n1, n2) ->
 
-    if n2.is_leaf() and n2.value is n1.value
-        return true
+    # Checks if n2 is a subtree of n1
+    is_subtree: (n1, n2) ->
+        return true if n2 is null
 
-    return is_subtree(n1.left, n2) or is_subtree(n1.right, n2)
+        if n2.is_leaf() and n2.value is n1.value
+            return true
 
-find_sum = (tree, search, sum=0, seq=[]) ->
-    if sum is search
-        console.log seq
-    for sub in [tree.left, tree.right] when sub
-        find_sum(sub, search, sum + tree.value, seq.concat([tree.value]))
+        return is_subtree(n1.left, n2) or is_subtree(n1.right, n2)
 
 module.exports = Tree

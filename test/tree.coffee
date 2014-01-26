@@ -42,6 +42,6 @@ describe 'Tree', ->
         it 'should create a new balanced binary tree from the array', ->
             assert.deepEqual(Tree.from_array([1, 2, 3]), tree2)
 
-    describe 'to_lists', ->
-        it 'should convert a tree to an array of linked lists, one for each level', ->
-            assert.deepEqual(tree2.to_lists(), lists)
+    describe 'find_sum', ->
+        it 'should find all paths in the tree that sum to the given value', ->
+            assert.deepEqual(tree2.find_sum(6), [[1, 2, 3]])
