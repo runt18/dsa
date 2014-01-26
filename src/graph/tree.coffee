@@ -44,10 +44,15 @@ class Tree
         return tree
 
     find_sum: (search, node=this, sum=0, seq=[], seqs=[]) ->
+        sum += node.value
+
         if sum is search
             seqs.push(seq)
-        for sub in [node.left, node.right] when sub
-            node.find_sum(search, sub, sum + node.value, seq.concat([node.value]), seqs)
+        if node.left
+            node.find_sum(search, node.left, sum, seq.concat([node.value]), seqs)
+        if node.right
+            node.find_sum(search, node.right, sum, seq.concat([node.value]), seqs)
+
         return seqs
 
     common_ancestor: (n1, n2) ->

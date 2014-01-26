@@ -44,4 +44,6 @@ describe 'Tree', ->
 
     describe 'find_sum', ->
         it 'should find all paths in the tree that sum to the given value', ->
-            assert.deepEqual(tree2.find_sum(6), [[1, 2, 3]])
+            assert.deepEqual(tree2.find_sum(3), [[2, 1]])
+            assert.deepEqual(tree2.find_sum(5), [[2, 3]])
+            # assert.deepEqual(tree2.find_sum(6), [[1, 2, 3]])
