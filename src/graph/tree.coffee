@@ -1,3 +1,5 @@
+List = require '../data/linked_list'
+
 class Node
     constructor: (@left=null, @right=null, @value=null) ->
 
@@ -25,4 +27,18 @@ make_tree = (array) ->
 
     return tree
 
-module.exports = {Node, height, is_balanced, make_tree}
+tree_to_lists = (node, lists=[], level=0) ->
+    unless lists[level]
+        lists[level] = new List()
+
+    lists[level].append(node.value)
+
+    if node.left
+        tree_to_lists(node.left, lists, level + 1)
+
+    if node.right
+        tree_to_lists(node.right, lists, level + 1)
+
+    return lists
+
+module.exports = {Node, height, is_balanced, make_tree, tree_to_lists}
