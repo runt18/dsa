@@ -43,6 +43,16 @@ class Tree
 
         return tree
 
+    is_unival: (tree=this) ->
+        unless tree.left or tree.right
+            return true
+
+        for sub in [tree.left, tree.right]
+            if sub and (tree.value isnt sub.value or not sub.is_unival())
+                return false
+
+        return true
+
     find_sum: (search, node=this, sum=0, seq=[], seqs=[]) ->
         sum += node.value
 
@@ -54,6 +64,7 @@ class Tree
             node.find_sum(search, node.right, sum, seq.concat([node.value]), seqs)
 
         return seqs
+
 
     common_ancestor: (n1, n2) ->
 

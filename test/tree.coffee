@@ -24,6 +24,13 @@ describe 'Tree', ->
         2
     )
 
+    tree3 = new Tree(
+        new Tree(null, null, 1),
+        new Tree(null, null, 1),
+        1
+    )
+
+
     l1 = new List()
     l1.append(2)
     l2 = new List()
@@ -47,3 +54,8 @@ describe 'Tree', ->
             assert.deepEqual(tree2.find_sum(3), [[2, 1]])
             assert.deepEqual(tree2.find_sum(5), [[2, 3]])
             # assert.deepEqual(tree2.find_sum(6), [[1, 2, 3]])
+
+    describe 'is_unival', ->
+        it 'should determine whether all values in the tree are the same', ->
+            assert.equal(tree1.is_unival(), false)
+            assert.equal(tree3.is_unival(), true)
