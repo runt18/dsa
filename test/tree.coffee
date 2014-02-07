@@ -59,3 +59,8 @@ describe 'Tree', ->
         it 'should determine whether all values in the tree are the same', ->
             assert.equal(tree1.is_unival(), false)
             assert.equal(tree3.is_unival(), true)
+
+    describe 'num_unival', ->
+        it 'should calculate the number of unival subtrees in the tree', ->
+            assert.equal(tree1.num_unival(), 3)
+            assert.equal(tree3.num_unival(), 3)

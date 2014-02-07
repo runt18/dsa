@@ -53,6 +53,24 @@ class Tree
 
         return true
 
+    num_unival: (depth=0, tree=this) ->
+        if not tree.left and not tree.right
+            return [1, true]
+
+        sum = 0
+        is_unival = true
+
+        for sub in [tree.left, tree.right]
+            if sub
+                [num, status] = sub.num_unival(depth + 1)
+                sum += num
+                if tree.value isnt sub.value or not status
+                    is_unival = false
+
+        sum++ if is_unival
+
+        return if depth is 0 then sum else [sum, is_unival]
+
     find_sum: (search, node=this, sum=0, seq=[], seqs=[]) ->
         sum += node.value
 
