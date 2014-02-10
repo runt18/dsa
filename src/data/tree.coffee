@@ -83,7 +83,6 @@ class Tree
 
         return seqs
 
-
     common_ancestor: (n1, n2) ->
 
     # Checks if n2 is a subtree of n1

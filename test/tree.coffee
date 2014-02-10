@@ -49,11 +49,11 @@ describe 'Tree', ->
         it 'should create a new balanced binary tree from the array', ->
             assert.deepEqual(Tree.from_array([1, 2, 3]), tree2)
 
-    describe 'find_sum', ->
-        it 'should find all paths in the tree that sum to the given value', ->
-            assert.deepEqual(tree2.find_sum(3), [[2, 1]])
-            assert.deepEqual(tree2.find_sum(5), [[2, 3]])
-            # assert.deepEqual(tree2.find_sum(6), [[1, 2, 3]])
+    # describe 'find_sum', ->
+    #     it 'should find all paths in the tree that sum to the given value', ->
+    #         assert.deepEqual(tree2.find_sum(3), [[2, 1]])
+    #         assert.deepEqual(tree2.find_sum(5), [[2, 3]])
+    #         # assert.deepEqual(tree2.find_sum(6), [[1, 2, 3]])
 
     describe 'is_unival', ->
         it 'should determine whether all values in the tree are the same', ->

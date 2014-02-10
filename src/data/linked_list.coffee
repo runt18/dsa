@@ -29,6 +29,21 @@ class List
                 return this
             el = el.next
 
+    reverse: ->
+        stack = []
+        el = @head
+
+        reved = new List()
+
+        while el isnt null
+            stack.push(el)
+            el = el.next
+
+        while stack.length isnt 0
+            reved.append(stack.pop())
+
+        return reved
+
     to_array: ->
         el = @head
         arr = []

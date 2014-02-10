@@ -9,6 +9,8 @@ assert = require 'assert'
     rotate_image
     zero_cross
     is_rotation
+    k_merge
+    merge_sorted
 } = require '../src/array'
 
 describe 'Array functions', ->
@@ -51,3 +53,22 @@ describe 'Array functions', ->
     describe 'Max', ->
         it 'should find the maximum element', ->
             assert.equal(max([3,5,7,1,9,2]), 9)
+
+    describe 'Merge sorted', ->
+        it 'should merge the two sorted arrays, keeping them sorted', ->
+            a_contents = [1, 4, 7, 9]
+            i = a_contents.length
+            b = [2, 5, 12]
+
+            a = new Array(i + b.length)
+            a[0...i] = a_contents
+
+            assert.deepEqual(merge_sorted(a, b, i - 1), [1, 2, 4, 5, 7, 9, 12])
+
+    # describe 'K-merge', ->
+    #     it 'should merge the sorted arrays', ->
+    #         a = [1, 4, 7]
+    #         b = [2, 3, 9]
+    #         c = [5, 6, 8]
+
+    #         assert.deepEqual(k_merge([a, b, c]), [1..9])

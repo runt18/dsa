@@ -59,7 +59,46 @@ is_rotation = (s1, s2) ->
     return false if s1.length isnt s2.length
     return (s1 + s1).indexOf(s2) isnt -1
 
-module.exports = module.exports = {
+extract_min = (a) -> a.splice(a.indexOf(_.min(a, (x) -> x.n)), 1)
+
+k_merge = (lists) ->
+    pointers = (0 for list in lists)
+    lengths = (list.length for list in lists)
+    total = lengths.reduce((m, x) -> m + x)
+    i = 0
+
+    out = []
+    queue = []
+
+    for list, i in lists
+        queue.push({n: list[0], i: i})
+
+    until i is total
+        m = extract_min(queue)
+        console.log m.n
+        out.push(m.n)
+        pointers[m.i]++
+        queue.push({n: list[m.i][pointers[m.i]], i: m.i})
+        i++
+
+    return out
+
+merge_sorted = (a, b, i) ->
+    ap = a.length - 1
+    bp = b.length - 1
+
+    while ap >= 0
+        if a[i] < b[bp]
+            a[ap] = b[bp]
+            bp--
+        else
+            a[ap] = a[i]
+            i--
+        ap--
+
+    return a
+
+module.exports = {
     all_unique
     reverse
     max
@@ -68,4 +107,6 @@ module.exports = module.exports = {
     rotate_image
     zero_cross
     is_rotation
+    k_merge
+    merge_sorted
 }
