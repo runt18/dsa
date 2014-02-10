@@ -98,6 +98,9 @@ merge_sorted = (a, b, i) ->
 
     return a
 
+sort_anagrams = (a) ->
+    (a[x.i] for x in _.sortBy(({str: s.split('').sort().join(''), i} for s, i in a), (x) -> x.str))
+
 module.exports = {
     all_unique
     reverse
@@ -109,4 +112,5 @@ module.exports = {
     is_rotation
     k_merge
     merge_sorted
+    sort_anagrams
 }

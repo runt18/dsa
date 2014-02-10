@@ -11,6 +11,7 @@ assert = require 'assert'
     is_rotation
     k_merge
     merge_sorted
+    sort_anagrams
 } = require '../src/array'
 
 describe 'Array functions', ->
@@ -53,6 +54,10 @@ describe 'Array functions', ->
     describe 'Max', ->
         it 'should find the maximum element', ->
             assert.equal(max([3,5,7,1,9,2]), 9)
+
+    describe 'Sort anagrams', ->
+        it 'should sort the array of strings so all anagrams are adjacent', ->
+            assert.deepEqual(sort_anagrams(['spot', 'eats', 'tops']), ['eats', 'spot', 'tops'])
 
     describe 'Merge sorted', ->
         it 'should merge the two sorted arrays, keeping them sorted', ->
